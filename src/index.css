@@ -130,21 +130,6 @@
   transform: translateY(0);
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.8s ease-out forwards;
-}
-
 /* Product card hover effect */
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;

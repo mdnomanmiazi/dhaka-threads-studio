@@ -1,14 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from "@/components/ui/carousel";
-import { ChevronLeft, ChevronRight, Circle, CircleDot } from "lucide-react";
 
 // Slide interface
 interface Slide {
@@ -50,132 +42,142 @@ const slides: Slide[] = [
 
 const HeroSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
-  const [api, setApi] = useState<any>(null);
-
+  const [transitioning, setTransitioning] = useState(false);
+  
   // Handle automatic slide transition
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
     
-    if (autoPlay && api) {
-      interval = setInterval(() => {
-        api.scrollNext();
-      }, 5000);
-    }
-    
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [autoPlay, api]);
+    return () => clearInterval(interval);
+  }, [currentSlide]);
   
-  // Pause autoplay on mouse enter, resume on mouse leave
-  const handleMouseEnter = () => setAutoPlay(false);
-  const handleMouseLeave = () => setAutoPlay(true);
+  // Navigate to next slide
+  const nextSlide = () => {
+    if (transitioning) return;
+    
+    setTransitioning(true);
+    setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+    
+    setTimeout(() => {
+      setTransitioning(false);
+    }, 1000);
+  };
+  
+  // Navigate to previous slide
+  const prevSlide = () => {
+    if (transitioning) return;
+    
+    setTransitioning(true);
+    setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));
+    
+    setTimeout(() => {
+      setTransitioning(false);
+    }, 1000);
+  };
+  
+  // Navigate to specific slide
+  const goToSlide = (index: number) => {
+    if (transitioning || index === currentSlide) return;
+    
+    setTransitioning(true);
+    setCurrentSlide(index);
+    
+    setTimeout(() => {
+      setTransitioning(false);
+    }, 1000);
+  };
   
   return (
-    <div 
-      className="relative h-screen w-full overflow-hidden bg-navy"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        className="w-full h-full"
-        setApi={(carouselApi) => {
-          setApi(carouselApi);
-          if (carouselApi) {
-            carouselApi.on("select", () => {
-              setCurrentSlide(carouselApi.selectedScrollSnap());
-            });
-          }
-        }}
-      >
-        <CarouselContent className="h-full">
-          {slides.map((slide, index) => (
-            <CarouselItem key={slide.id} className="h-full p-0">
-              <div className="relative h-full w-full">
-                {/* Background image with overlay */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-10000"
-                  style={{ 
-                    backgroundImage: `url(${slide.image})`,
-                    transform: index === currentSlide ? 'scale(1.05)' : 'scale(1)', 
-                  }}
+    <div className="relative h-screen w-full overflow-hidden bg-navy">
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+          }`}
+        >
+          {/* Background image with overlay */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              transform: index === currentSlide ? 'scale(1.05)' : 'scale(1)', 
+              transition: 'transform 6s ease-out',
+            }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          </div>
+          
+          {/* Slide content */}
+          <div className="relative z-20 h-full flex items-center">
+            <div className="container-custom">
+              <div className="max-w-3xl mx-auto text-center text-white">
+                <h1 
+                  className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transform transition-transform duration-700 ${
+                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
                 >
-                  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-                </div>
-                
-                {/* Slide content */}
-                <div className="relative z-20 h-full flex items-center">
-                  <div className="container-custom">
-                    <div className="max-w-3xl mx-auto text-center text-white">
-                      <h1 
-                        className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in`}
-                      >
-                        {slide.heading}
-                      </h1>
-                      <p 
-                        className={`text-lg md:text-xl mb-8 animate-fade-in`}
-                      >
-                        {slide.subheading}
-                      </p>
-                      <div 
-                        className={`animate-fade-in`}
-                      >
-                        <Link to={slide.ctaLink} className="btn-secondary">
-                          {slide.ctaText}
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  {slide.heading}
+                </h1>
+                <p 
+                  className={`text-lg md:text-xl mb-8 transform transition-transform delay-300 duration-700 ${
+                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
+                >
+                  {slide.subheading}
+                </p>
+                <div 
+                  className={`transform transition-all delay-500 duration-700 ${
+                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
+                >
+                  <Link to={slide.ctaLink} className="btn-secondary">
+                    {slide.ctaText}
+                  </Link>
                 </div>
               </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        
-        {/* Custom navigation arrows */}
-        <button
-          onClick={() => {
-            api?.scrollPrev();
-          }}
-          className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        
-        <button
-          onClick={() => {
-            api?.scrollNext();
-          }}
-          className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
-        
-        {/* Slide indicators */}
-        <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center space-x-3">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className="flex items-center justify-center h-8 w-8"
-              aria-label={`Go to slide ${index + 1}`}
-            >
-              {index === currentSlide ? (
-                <CircleDot className="h-3 w-3 text-gold" />
-              ) : (
-                <Circle className="h-3 w-3 text-white/50 hover:text-white/80" />
-              )}
-            </button>
-          ))}
+            </div>
+          </div>
         </div>
-      </Carousel>
+      ))}
+      
+      {/* Navigation arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        aria-label="Previous slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button
+        onClick={nextSlide}
+        className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        aria-label="Next slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      
+      {/* Slide indicators */}
+      <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center space-x-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentSlide ? 'bg-gold' : 'bg-white/50 hover:bg-white/80'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
