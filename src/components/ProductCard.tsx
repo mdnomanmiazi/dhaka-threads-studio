@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               }}
             ></div>
             <div className="absolute top-4 left-4">
-              <span className="bg-gold text-navy text-xs font-bold px-2 py-1 rounded">
+              <span className="bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full">
                 {category}
               </span>
             </div>
@@ -72,13 +72,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             
             <div 
-              className="mt-4 text-gold text-sm font-medium transition-all duration-300"
+              className="mt-4 flex items-center text-gold text-sm font-medium transition-all duration-300"
               style={{
-                transform: isHovered ? 'translateY(0)' : 'translateY(5px)',
+                transform: isHovered ? 'translateX(8px)' : 'translateX(0)',
                 opacity: isHovered ? 1 : 0.7,
               }}
             >
-              View Details
+              <span>View Details</span>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-4 w-4 ml-1 transition-transform duration-300"
+                style={{
+                  transform: isHovered ? 'translateX(4px)' : 'translateX(0)',
+                }}
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </div>
         </div>
@@ -86,7 +98,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       
       <DialogContent className="max-w-3xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-lg overflow-hidden">
+          <div className="rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-[1.02]">
             <img
               src={image}
               alt={title}
@@ -95,7 +107,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           <div>
             <div className="mb-2">
-              <span className="bg-gold text-navy text-xs font-bold px-2 py-1 rounded">
+              <span className="bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full">
                 {category}
               </span>
             </div>
@@ -116,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             
             <div className="mt-6">
-              <button className="btn-primary w-full">
+              <button className="btn-primary w-full btn-hover-effect">
                 Request Sample
               </button>
             </div>

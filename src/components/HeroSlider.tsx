@@ -1,6 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 // Slide interface
 interface Slide {
@@ -41,138 +43,146 @@ const slides: Slide[] = [
 ];
 
 const HeroSlider: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-  
-  // Handle automatic slide transition
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  // Initialize embla
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    if (!emblaApi) return;
     
-    return () => clearInterval(interval);
-  }, [currentSlide]);
-  
-  // Navigate to next slide
-  const nextSlide = () => {
-    if (transitioning) return;
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
     
-    setTransitioning(true);
-    setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Autoplay functionality
+  const autoplay = useCallback(() => {
+    if (isPaused || !emblaApi) return;
     
-    setTimeout(() => {
-      setTransitioning(false);
-    }, 1000);
-  };
-  
-  // Navigate to previous slide
-  const prevSlide = () => {
-    if (transitioning) return;
+    if (autoplayRef.current) {
+      clearTimeout(autoplayRef.current);
+    }
     
-    setTransitioning(true);
-    setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));
+    autoplayRef.current = setTimeout(() => {
+      emblaApi.scrollNext();
+      autoplay();
+    }, 5000); // 5 seconds interval
+  }, [emblaApi, isPaused]);
+
+  // Start autoplay
+  useEffect(() => {
+    autoplay();
     
-    setTimeout(() => {
-      setTransitioning(false);
-    }, 1000);
-  };
-  
-  // Navigate to specific slide
-  const goToSlide = (index: number) => {
-    if (transitioning || index === currentSlide) return;
-    
-    setTransitioning(true);
-    setCurrentSlide(index);
-    
-    setTimeout(() => {
-      setTransitioning(false);
-    }, 1000);
-  };
-  
+    return () => {
+      if (autoplayRef.current) {
+        clearTimeout(autoplayRef.current);
+      }
+    };
+  }, [autoplay]);
+
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-navy">
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
-        >
-          {/* Background image with overlay */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${slide.image})`,
-              transform: index === currentSlide ? 'scale(1.05)' : 'scale(1)', 
-              transition: 'transform 6s ease-out',
-            }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          </div>
-          
-          {/* Slide content */}
-          <div className="relative z-20 h-full flex items-center">
-            <div className="container-custom">
-              <div className="max-w-3xl mx-auto text-center text-white">
-                <h1 
-                  className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transform transition-transform duration-700 ${
-                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  {slide.heading}
-                </h1>
-                <p 
-                  className={`text-lg md:text-xl mb-8 transform transition-transform delay-300 duration-700 ${
-                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  {slide.subheading}
-                </p>
-                <div 
-                  className={`transform transition-all delay-500 duration-700 ${
-                    index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                  }`}
-                >
-                  <Link to={slide.ctaLink} className="btn-secondary">
-                    {slide.ctaText}
-                  </Link>
+    <div 
+      className="relative h-screen w-full overflow-hidden bg-navy"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
+        <div className="flex h-full w-full">
+          {slides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className="relative flex-[0_0_100%] h-full"
+            >
+              {/* Background image with overlay */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-[8s]"
+                style={{ 
+                  backgroundImage: `url(${slide.image})`,
+                  transform: index === selectedIndex ? 'scale(1.08)' : 'scale(1.01)',
+                }}
+              >
+                <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+              </div>
+              
+              {/* Slide content */}
+              <div className="relative z-20 h-full flex items-center">
+                <div className="container-custom">
+                  <div className="max-w-3xl mx-auto text-center text-white">
+                    <h1 
+                      className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transform transition-all duration-1000 ${
+                        index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                      }`}
+                    >
+                      {slide.heading}
+                    </h1>
+                    <p 
+                      className={`text-lg md:text-xl mb-8 transform transition-all delay-300 duration-1000 ${
+                        index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                      }`}
+                    >
+                      {slide.subheading}
+                    </p>
+                    <div 
+                      className={`transform transition-all delay-500 duration-1000 ${
+                        index === selectedIndex ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                      }`}
+                    >
+                      <Link to={slide.ctaLink} className="btn-secondary">
+                        {slide.ctaText}
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
       
       {/* Navigation arrows */}
       <button
-        onClick={prevSlide}
-        className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        onClick={() => emblaApi?.scrollPrev()}
+        className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-colors"
         aria-label="Previous slide"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
+        <ChevronLeft className="h-6 w-6" />
       </button>
       
       <button
-        onClick={nextSlide}
-        className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+        onClick={() => emblaApi?.scrollNext()}
+        className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-colors"
         aria-label="Next slide"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
+        <ChevronRight className="h-6 w-6" />
       </button>
       
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center space-x-2">
-        {slides.map((_, index) => (
+      <div className="absolute bottom-8 left-0 right-0 z-30 flex justify-center space-x-2">
+        {scrollSnaps.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? 'bg-gold' : 'bg-white/50 hover:bg-white/80'
+            onClick={() => scrollTo(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === selectedIndex 
+                ? 'bg-gold w-8' 
+                : 'bg-white/50 hover:bg-white/80'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

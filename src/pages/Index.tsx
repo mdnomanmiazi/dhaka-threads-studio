@@ -1,9 +1,10 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSlider from '@/components/HeroSlider';
 import FeatureColumn from '@/components/FeatureColumn';
 import ProductCard from '@/components/ProductCard';
+import ProductGallery from '@/components/ProductGallery';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -18,10 +19,10 @@ const Index = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
     );
     
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .stagger-item');
     animatedElements.forEach((el) => observer.observe(el));
     
     return () => {
@@ -75,9 +76,64 @@ const Index = () => {
       tags: ["Women's", "Stretch Denim", "Designer"],
     },
   ];
+
+  // Product category galleries
+  const wovenGallery = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
+      alt: "Premium cotton shirt"
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      alt: "Linen blend blazers"
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      alt: "Oxford button-down shirt"
+    }
+  ];
+  
+  const knitGallery = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      alt: "Soft knit sweater"
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
+      alt: "Cotton T-shirt"
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+      alt: "Performance polo"
+    }
+  ];
+  
+  const denimGallery = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      alt: "Designer denim jeans"
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      alt: "Men's straight fit jeans"
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1624378439575-d8705ad7b66b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
+      alt: "Denim jacket"
+    }
+  ];
   
   return (
-    <>
+    <div className="page-transition">
       <Header />
       
       {/* Hero Section */}
@@ -116,6 +172,30 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Category Galleries */}
+      <div className="bg-white py-8">
+        <ProductGallery 
+          title="Woven Excellence" 
+          description="Discover our premium collection of woven garments, from shirts to blazers, all crafted with the finest materials and attention to detail."
+          categoryLink="/woven"
+          images={wovenGallery}
+        />
+        
+        <ProductGallery 
+          title="Knit Comfort" 
+          description="Experience the perfect blend of comfort and style with our knit collection, featuring everything from casual t-shirts to luxury sweaters."
+          categoryLink="/knit"
+          images={knitGallery}
+        />
+        
+        <ProductGallery 
+          title="Denim Durability" 
+          description="Explore our range of premium denim products, combining classic styling with modern techniques for unmatched quality and comfort."
+          categoryLink="/denim"
+          images={denimGallery}
+        />
+      </div>
+      
       {/* Featured Products Section */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -126,7 +206,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProducts.map((product, index) => (
-              <div key={product.id} className="animate-on-scroll">
+              <div key={product.id} className="stagger-item">
                 <ProductCard 
                   image={product.image}
                   title={product.title}
@@ -157,7 +237,7 @@ const Index = () => {
               <Link to="/contact" className="btn-secondary">
                 Contact Us
               </Link>
-              <Link to="/about" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-navy transition-colors px-6 py-3 rounded">
+              <Link to="/about" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-navy transition-all px-6 py-3 rounded btn-hover-effect">
                 Learn More
               </Link>
             </div>
@@ -174,19 +254,19 @@ const Index = () => {
           </div>
           
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
-            <div className="w-24 h-12 animate-on-scroll flex items-center justify-center">
+            <div className="w-24 h-12 stagger-item flex items-center justify-center">
               <div className="text-2xl font-bold text-gray-400">BRAND 1</div>
             </div>
-            <div className="w-24 h-12 animate-on-scroll flex items-center justify-center">
+            <div className="w-24 h-12 stagger-item flex items-center justify-center">
               <div className="text-2xl font-bold text-gray-400">BRAND 2</div>
             </div>
-            <div className="w-24 h-12 animate-on-scroll flex items-center justify-center">
+            <div className="w-24 h-12 stagger-item flex items-center justify-center">
               <div className="text-2xl font-bold text-gray-400">BRAND 3</div>
             </div>
-            <div className="w-24 h-12 animate-on-scroll flex items-center justify-center">
+            <div className="w-24 h-12 stagger-item flex items-center justify-center">
               <div className="text-2xl font-bold text-gray-400">BRAND 4</div>
             </div>
-            <div className="w-24 h-12 animate-on-scroll flex items-center justify-center">
+            <div className="w-24 h-12 stagger-item flex items-center justify-center">
               <div className="text-2xl font-bold text-gray-400">BRAND 5</div>
             </div>
           </div>
@@ -194,7 +274,7 @@ const Index = () => {
       </section>
       
       <Footer />
-    </>
+    </div>
   );
 };
 
