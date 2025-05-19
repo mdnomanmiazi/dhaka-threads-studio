@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import MouseCursorEffect from '@/components/MouseCursorEffect';
 
 const Index = () => {
   // Animation observer for scroll animations
@@ -134,6 +135,7 @@ const Index = () => {
   
   return (
     <div className="page-transition">
+      <MouseCursorEffect />
       <Header />
       
       {/* Hero Section */}
@@ -181,12 +183,34 @@ const Index = () => {
           images={wovenGallery}
         />
         
-        <ProductGallery 
-          title="Knit Comfort" 
-          description="Experience the perfect blend of comfort and style with our knit collection, featuring everything from casual t-shirts to luxury sweaters."
-          categoryLink="/knit"
-          images={knitGallery}
-        />
+        {/* Knit Comfort now left-aligned */}
+        <div className="container-custom py-16">
+          <div className="flex flex-col md:flex-row">
+            <div className="w-full md:w-1/2 md:pr-8">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">Knit Comfort</h2>
+              <p className="text-gray-600 mb-6">Experience the perfect blend of comfort and style with our knit collection, featuring everything from casual t-shirts to luxury sweaters.</p>
+              <Link to="/knit" className="inline-block btn-secondary mb-8 md:mb-0">
+                Explore Knit Products
+              </Link>
+            </div>
+            <div className="w-full md:w-1/2">
+              <div className="grid grid-cols-2 gap-4">
+                {knitGallery.map((image) => (
+                  <div key={image.id} className="relative overflow-hidden rounded-lg gallery-item">
+                    <img 
+                      src={image.src} 
+                      alt={image.alt} 
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute inset-0 overlay flex items-end">
+                      <p className="text-white px-4 pb-4 text-sm opacity-0 group-hover:opacity-100 transition-opacity">{image.alt}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
         
         <ProductGallery 
           title="Denim Durability" 

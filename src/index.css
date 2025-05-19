@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -213,6 +212,45 @@
 /* Enhance scroll experience */
 html {
   scroll-behavior: smooth;
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: theme('colors.gold');
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-cursor-trail {
+  pointer-events: none;
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+  z-index: 9998;
+}
+
+.cursor-clicked {
+  transform: translate(-50%, -50%) scale(0.8);
+  background-color: theme('colors.navy');
+}
+
+.cursor-hovering {
+  width: 30px;
+  height: 30px;
+  background-color: theme('colors.navy');
+  mix-blend-mode: normal;
 }
 
 /* Enhanced button effects */
