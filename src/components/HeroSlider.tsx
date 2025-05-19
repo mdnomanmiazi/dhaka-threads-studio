@@ -51,21 +51,22 @@ const slides: Slide[] = [
 const HeroSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [api, setApi] = useState<any>(null);
 
   // Handle automatic slide transition
   useEffect(() => {
     let interval: NodeJS.Timeout;
     
-    if (autoPlay) {
+    if (autoPlay && api) {
       interval = setInterval(() => {
-        setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
+        api.scrollNext();
       }, 5000);
     }
     
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [autoPlay]);
+  }, [autoPlay, api]);
   
   // Pause autoplay on mouse enter, resume on mouse leave
   const handleMouseEnter = () => setAutoPlay(false);
@@ -83,14 +84,14 @@ const HeroSlider: React.FC = () => {
           loop: true,
         }}
         className="w-full h-full"
-        setApi={(api) => {
-          if (api) {
-            api.on("select", () => {
-              setCurrentSlide(api.selectedScrollSnap());
+        setApi={(carouselApi) => {
+          setApi(carouselApi);
+          if (carouselApi) {
+            carouselApi.on("select", () => {
+              setCurrentSlide(carouselApi.selectedScrollSnap());
             });
           }
         }}
-        current={currentSlide}
       >
         <CarouselContent className="h-full">
           {slides.map((slide, index) => (
@@ -139,7 +140,7 @@ const HeroSlider: React.FC = () => {
         {/* Custom navigation arrows */}
         <button
           onClick={() => {
-            setCurrentSlide(prev => (prev === 0 ? slides.length - 1 : prev - 1));
+            api?.scrollPrev();
           }}
           className="absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
           aria-label="Previous slide"
@@ -149,7 +150,7 @@ const HeroSlider: React.FC = () => {
         
         <button
           onClick={() => {
-            setCurrentSlide(prev => (prev === slides.length - 1 ? 0 : prev + 1));
+            api?.scrollNext();
           }}
           className="absolute top-1/2 right-4 z-30 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
           aria-label="Next slide"
@@ -162,7 +163,7 @@ const HeroSlider: React.FC = () => {
           {slides.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => api?.scrollTo(index)}
               className="flex items-center justify-center h-8 w-8"
               aria-label={`Go to slide ${index + 1}`}
             >
