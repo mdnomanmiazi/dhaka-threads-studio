@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import MegaMenu from './MegaMenu';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,42 +45,17 @@ const Header = () => {
           </h1>
         </Link>
         
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-8">
-          <Link to="/" className={`transition hover:text-gold ${isActive('/') ? 'text-gold font-medium' : 'text-navy'}`}>
-            Home
-          </Link>
-          
-          {/* Products dropdown */}
-          <div className="relative group">
-            <span className={`cursor-pointer transition hover:text-gold ${(isActive('/woven') || isActive('/knit') || isActive('/denim')) ? 'text-gold font-medium' : 'text-navy'}`}>
-              Products
-            </span>
-            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden transform scale-0 group-hover:scale-100 opacity-0 group-hover:opacity-100 transition-all duration-300 origin-top">
-              <Link to="/woven" className="block px-4 py-2 text-navy hover:bg-navy hover:text-white transition">
-                Woven
-              </Link>
-              <Link to="/knit" className="block px-4 py-2 text-navy hover:bg-navy hover:text-white transition">
-                Knit
-              </Link>
-              <Link to="/denim" className="block px-4 py-2 text-navy hover:bg-navy hover:text-white transition">
-                Denim
-              </Link>
-            </div>
-          </div>
-          
-          <Link to="/about" className={`transition hover:text-gold ${isActive('/about') ? 'text-gold font-medium' : 'text-navy'}`}>
-            About Us
-          </Link>
-          
-          <Link to="/contact" className={`transition hover:text-gold ${isActive('/contact') ? 'text-gold font-medium' : 'text-navy'}`}>
-            Contact Us
-          </Link>
-          
+        {/* Desktop Navigation with MegaMenu */}
+        <div className="hidden lg:block">
+          <MegaMenu />
+        </div>
+        
+        {/* Get a Quote Button */}
+        <div className="hidden lg:block">
           <Link to="/contact" className="btn-primary">
             Get a Quote
           </Link>
-        </nav>
+        </div>
         
         {/* Mobile Navigation Toggle */}
         <button 
