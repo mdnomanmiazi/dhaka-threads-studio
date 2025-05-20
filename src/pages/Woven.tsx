@@ -3,10 +3,33 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import ProductCategorySlider from '@/components/ProductCategorySlider';
 
 const Woven = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  
+  // Featured slides for the category
+  const featuredSlides = [
+    {
+      id: 1,
+      image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
+      title: "Premium Cotton Shirts",
+      description: "High-quality cotton shirts with premium stitching and attention to detail, perfect for both casual and formal wear.",
+    },
+    {
+      id: 2,
+      image: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      title: "Linen Blend Blazers",
+      description: "Sophisticated linen blend blazers with expert tailoring and premium details, designed for comfort and style.",
+    },
+    {
+      id: 3,
+      image: "https://images.unsplash.com/photo-1591369822096-ffd140ec948f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      title: "Formal Trousers",
+      description: "Premium formal trousers crafted from high-quality wool and poly blends, featuring precise tailoring and elegant styling.",
+    },
+  ];
   
   // Woven products data
   const products = [
@@ -137,6 +160,27 @@ const Woven = () => {
         </div>
       </section>
       
+      {/* Featured Products Slider */}
+      <ProductCategorySlider slides={featuredSlides} category="Woven" />
+      
+      {/* Decorative Element */}
+      <div className="py-8 bg-white">
+        <div className="container-custom">
+          <div className="flex items-center justify-center">
+            <div className="h-px bg-gray-200 w-1/3"></div>
+            <div className="mx-4">
+              <div className="w-12 h-12 rounded-full bg-navy flex items-center justify-center animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M6 9h12m-6 3h6m-9 3h9m-9 3h9"></path>
+                  <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                </svg>
+              </div>
+            </div>
+            <div className="h-px bg-gray-200 w-1/3"></div>
+          </div>
+        </div>
+      </div>
+      
       {/* Filters */}
       <section className="py-8 bg-gray-50 border-b">
         <div className="container-custom">
@@ -145,9 +189,9 @@ const Woven = () => {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm transition-all transform hover:scale-105 ${
                   activeFilter === filter 
-                    ? 'bg-navy text-white' 
+                    ? 'bg-navy text-white shadow-md' 
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -159,8 +203,18 @@ const Woven = () => {
       </section>
       
       {/* Products Grid */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
+      <section className="section-padding bg-white relative">
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-5">
+          <div className="absolute inset-0" 
+            style={{ 
+              backgroundImage: 'linear-gradient(90deg, #d4af37 1px, transparent 1px), linear-gradient(#d4af37 1px, transparent 1px)',
+              backgroundSize: '40px 40px'
+            }}>
+          </div>
+        </div>
+      
+        <div className="container-custom relative">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-12">
               <h3 className="text-xl text-gray-600">No products found matching your filter criteria.</h3>
@@ -193,12 +247,20 @@ const Woven = () => {
       {/* CTA Section */}
       <section className="py-16 bg-gray-50">
         <div className="container-custom">
-          <div className="bg-navy text-white rounded-lg p-8 md:p-12 flex flex-col md:flex-row justify-between items-center animate-on-scroll">
-            <div className="mb-6 md:mb-0 text-center md:text-left">
+          <div className="bg-navy text-white rounded-lg p-8 md:p-12 flex flex-col md:flex-row justify-between items-center animate-on-scroll relative overflow-hidden">
+            {/* Decorative pattern */}
+            <div className="absolute inset-0 pointer-events-none opacity-10">
+              <div className="w-full h-full" style={{ 
+                backgroundImage: 'radial-gradient(circle, #d4af37 1px, transparent 1px)',
+                backgroundSize: '20px 20px'
+              }}></div>
+            </div>
+            
+            <div className="mb-6 md:mb-0 text-center md:text-left relative z-10">
               <h3 className="text-2xl font-serif font-bold mb-2">Need Custom Woven Products?</h3>
               <p className="text-white/80">Contact us to discuss your specific requirements and get a personalized quote.</p>
             </div>
-            <a href="/contact" className="btn-secondary whitespace-nowrap">
+            <a href="/contact" className="btn-secondary hover:scale-105 transition-transform whitespace-nowrap relative z-10">
               Request a Quote
             </a>
           </div>

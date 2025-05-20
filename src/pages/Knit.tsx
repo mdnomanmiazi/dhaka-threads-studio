@@ -3,10 +3,33 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import ProductCategorySlider from '@/components/ProductCategorySlider';
 
 const Knit = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  
+  // Featured slides for the category
+  const featuredSlides = [
+    {
+      id: 1,
+      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      title: "Soft Knit Sweaters",
+      description: "Luxuriously soft knit sweaters made from premium yarns, providing comfort and style for all seasons.",
+    },
+    {
+      id: 2,
+      image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
+      title: "Cotton T-Shirts",
+      description: "Premium cotton t-shirts with superior comfort and durability, perfect for everyday wear or custom branding.",
+    },
+    {
+      id: 3,
+      image: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+      title: "Performance Polos",
+      description: "High-performance polo shirts made from technical fabrics that provide moisture-wicking and comfort for active wear.",
+    },
+  ];
   
   // Knit products data
   const products = [
@@ -137,6 +160,29 @@ const Knit = () => {
         </div>
       </section>
       
+      {/* Featured Products Slider */}
+      <ProductCategorySlider slides={featuredSlides} category="Knit" />
+      
+      {/* Decorative Element */}
+      <div className="py-8 bg-white">
+        <div className="container-custom">
+          <div className="flex items-center justify-center">
+            <div className="h-px bg-gray-200 w-1/3"></div>
+            <div className="mx-4">
+              <div className="w-12 h-12 rounded-full bg-navy flex items-center justify-center animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M12.5 3L10 9h8l-2.5 6"></path>
+                  <path d="M6 12l-3 9h6"></path>
+                  <path d="M13.5 12H20"></path>
+                  <path d="M5.5 21l5-9"></path>
+                </svg>
+              </div>
+            </div>
+            <div className="h-px bg-gray-200 w-1/3"></div>
+          </div>
+        </div>
+      </div>
+      
       {/* Filters */}
       <section className="py-8 bg-gray-50 border-b">
         <div className="container-custom">
@@ -145,9 +191,9 @@ const Knit = () => {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm transition-all transform hover:scale-105 ${
                   activeFilter === filter 
-                    ? 'bg-navy text-white' 
+                    ? 'bg-navy text-white shadow-md' 
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
@@ -159,8 +205,18 @@ const Knit = () => {
       </section>
       
       {/* Products Grid */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
+      <section className="section-padding bg-white relative">
+        {/* Decorative background pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-5">
+          <div className="absolute inset-0" 
+            style={{ 
+              backgroundImage: 'repeating-linear-gradient(45deg, #d4af37 0, #d4af37 1px, transparent 0, transparent 50%)',
+              backgroundSize: '20px 20px'
+            }}>
+          </div>
+        </div>
+      
+        <div className="container-custom relative">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-12">
               <h3 className="text-xl text-gray-600">No products found matching your filter criteria.</h3>
@@ -193,12 +249,20 @@ const Knit = () => {
       {/* CTA Section */}
       <section className="py-16 bg-gray-50">
         <div className="container-custom">
-          <div className="bg-navy text-white rounded-lg p-8 md:p-12 flex flex-col md:flex-row justify-between items-center animate-on-scroll">
-            <div className="mb-6 md:mb-0 text-center md:text-left">
+          <div className="bg-navy text-white rounded-lg p-8 md:p-12 flex flex-col md:flex-row justify-between items-center animate-on-scroll relative overflow-hidden">
+            {/* Decorative pattern */}
+            <div className="absolute inset-0 pointer-events-none opacity-10">
+              <div className="w-full h-full" style={{ 
+                backgroundImage: 'repeating-linear-gradient(90deg, #d4af37, #d4af37 10px, transparent 10px, transparent 20px)',
+                backgroundSize: '20px 100%'
+              }}></div>
+            </div>
+            
+            <div className="mb-6 md:mb-0 text-center md:text-left relative z-10">
               <h3 className="text-2xl font-serif font-bold mb-2">Looking for Custom Knitwear?</h3>
               <p className="text-white/80">Our team can help create custom knit garments tailored to your brand specifications.</p>
             </div>
-            <a href="/contact" className="btn-secondary whitespace-nowrap">
+            <a href="/contact" className="btn-secondary hover:scale-105 transition-transform whitespace-nowrap relative z-10">
               Request a Quote
             </a>
           </div>
