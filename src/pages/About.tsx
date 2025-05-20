@@ -1,7 +1,12 @@
-
 import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const About = () => {
   // Animation observer for scroll animations
@@ -129,6 +134,133 @@ const About = () => {
             <div className="text-center animate-on-scroll">
               <div className="text-5xl font-bold text-gold mb-2">25+</div>
               <div className="text-lg">Countries Served</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Accreditations and Certifications */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">Our Accreditations & Certifications</h2>
+            <p className="text-gray-600">We adhere to international standards and are proudly certified by leading industry organizations.</p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+            {/* Certification 1 */}
+            <div className="animate-on-scroll">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+                      <div className="w-full h-32 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1614036634955-ae5e90f9b9eb?auto=format&fit=crop&q=80" 
+                          alt="ISO 9001 Certification" 
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="text-center mt-4 font-medium text-navy">ISO 9001</p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-navy text-white">
+                    <p>ISO 9001 - Quality Management Systems</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            
+            {/* Certification 2 */}
+            <div className="animate-on-scroll">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+                      <div className="w-full h-32 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80" 
+                          alt="Global Organic Textile Standard" 
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="text-center mt-4 font-medium text-navy">GOTS</p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-navy text-white">
+                    <p>Global Organic Textile Standard</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            
+            {/* Certification 3 */}
+            <div className="animate-on-scroll">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+                      <div className="w-full h-32 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1621950631914-151bdb1f6cd8?auto=format&fit=crop&q=80" 
+                          alt="OEKO-TEX Standard 100" 
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="text-center mt-4 font-medium text-navy">OEKO-TEX</p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-navy text-white">
+                    <p>OEKO-TEX Standard 100 - Tested for harmful substances</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            
+            {/* Certification 4 */}
+            <div className="animate-on-scroll">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+                      <div className="w-full h-32 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1611784728558-6a883d5d7f08?auto=format&fit=crop&q=80" 
+                          alt="Fair Trade Certification" 
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="text-center mt-4 font-medium text-navy">Fair Trade</p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-navy text-white">
+                    <p>Fair Trade Certified - Supporting ethical labor practices</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+            
+            {/* Certification 5 */}
+            <div className="animate-on-scroll">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
+                      <div className="w-full h-32 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1607000975981-3231515bd113?auto=format&fit=crop&q=80" 
+                          alt="Carbon Trust Standard" 
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <p className="text-center mt-4 font-medium text-navy">Carbon Trust</p>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-navy text-white">
+                    <p>Carbon Trust Standard - Environmental sustainability</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
         </div>
