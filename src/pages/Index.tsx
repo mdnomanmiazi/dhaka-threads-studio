@@ -1,10 +1,10 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSlider from '@/components/HeroSlider';
 import FeatureColumn from '@/components/FeatureColumn';
 import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
+import FabricFeatures from '@/components/FabricFeatures';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MouseCursorEffect from '@/components/MouseCursorEffect';
@@ -62,6 +62,22 @@ const Index = () => {
     },
     {
       id: 2,
+      image: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      title: "Linen Blend Blazers",
+      category: "Woven",
+      description: "Linen blend blazers with a touch of sophistication, perfect for any occasion.",
+      tags: ["Men's", "Linen", "Blazers"],
+    },
+    {
+      id: 3,
+      image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+      title: "Oxford Button-Down Shirt",
+      category: "Woven",
+      description: "A classic Oxford button-down shirt with a timeless look and feel.",
+      tags: ["Men's", "Oxford", "Shirt"],
+    },
+    {
+      id: 4,
       image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       title: "Soft Knit Sweaters",
       category: "Knit",
@@ -69,12 +85,44 @@ const Index = () => {
       tags: ["Unisex", "Cashmere Blend", "Premium"],
     },
     {
-      id: 3,
+      id: 5,
+      image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
+      title: "Cotton T-Shirt",
+      category: "Knit",
+      description: "A comfortable cotton t-shirt with a relaxed fit and classic style.",
+      tags: ["Unisex", "Cotton", "T-Shirt"],
+    },
+    {
+      id: 6,
+      image: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+      title: "Performance Polo",
+      category: "Knit",
+      description: "A high-performance polo shirt designed for comfort and style.",
+      tags: ["Unisex", "Performance", "Polo"],
+    },
+    {
+      id: 7,
       image: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       title: "Designer Denim Jeans",
       category: "Denim",
       description: "Premium denim jeans with modern washes and expert craftsmanship, designed for comfort and durability.",
       tags: ["Women's", "Stretch Denim", "Designer"],
+    },
+    {
+      id: 8,
+      image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      title: "Men's Straight Fit Jeans",
+      category: "Denim",
+      description: "A classic men's straight fit jeans with a timeless look and feel.",
+      tags: ["Men's", "Straight Fit", "Jeans"],
+    },
+    {
+      id: 9,
+      image: "https://images.unsplash.com/photo-1624378439575-d8705ad7b66b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
+      title: "Denim Jacket",
+      category: "Denim",
+      description: "A stylish denim jacket with a modern twist, perfect for any occasion.",
+      tags: ["Men's", "Denim", "Jacket"],
     },
   ];
 
@@ -173,6 +221,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* New Fabric Features Section */}
+      <FabricFeatures />
       
       {/* Category Galleries */}
       <div className="bg-white py-8">
