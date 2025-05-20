@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -6,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -15,10 +16,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 215 69% 19%;
+    --primary: 210 100% 35%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 45 76% 52%;
+    --secondary: 195 83% 60%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -102,11 +103,11 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-navy text-white hover:bg-navy/90 transition-all px-6 py-3 rounded transform hover:translate-y-[-2px] hover:shadow-lg;
+    @apply bg-primary text-white hover:bg-primary/90 transition-all px-6 py-3 rounded-md transform hover:translate-y-[-2px] hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-gold text-navy hover:bg-gold/90 transition-all px-6 py-3 rounded transform hover:translate-y-[-2px] hover:shadow-lg;
+    @apply bg-secondary text-primary hover:bg-secondary/90 transition-all px-6 py-3 rounded-md transform hover:translate-y-[-2px] hover:shadow-lg;
   }
   
   .section-padding {
@@ -115,6 +116,26 @@
   
   .container-custom {
     @apply container mx-auto px-4;
+  }
+
+  .glass {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6 transition-all duration-300 hover:bg-white/20;
+  }
+
+  .frost-panel {
+    @apply backdrop-blur-md bg-white/40 border border-white/30 rounded-xl shadow-lg;
+  }
+
+  .cold-gradient {
+    @apply bg-gradient-to-br from-blue-50 via-blue-100 to-sky-100;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500;
   }
 }
 
@@ -151,6 +172,55 @@
   transform: translateY(0);
 }
 
+/* Floating elements animation */
+.float {
+  animation: floating 6s ease-in-out infinite;
+}
+
+.float-delayed {
+  animation: floating 8s ease-in-out infinite 1s;
+}
+
+.float-slow {
+  animation: floating 10s ease-in-out infinite 2s;
+}
+
+@keyframes floating {
+  0% { transform: translate(0, 0px); }
+  50% { transform: translate(0, 15px); }
+  100% { transform: translate(0, 0px); }
+}
+
+/* Parallax effect */
+.parallax {
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+/* Animated line */
+.animated-line {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.5), transparent);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, rgba(59, 130, 246, 1), transparent);
+  animation: line-slide 3s infinite;
+}
+
+@keyframes line-slide {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
 /* Page transitions */
 .page-transition {
   position: relative;
@@ -164,7 +234,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: theme('colors.navy');
+  background-color: theme('colors.primary.DEFAULT');
   transform: translateX(-100%);
   z-index: 100;
   animation: pageSweep 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -221,7 +291,7 @@ html {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: theme('colors.gold');
+  background-color: theme('colors.secondary.DEFAULT');
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
   z-index: 9999;
@@ -235,7 +305,7 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(99, 179, 237, 0.3);
   transform: translate(-50%, -50%);
   transition: all 0.15s ease;
   z-index: 9998;
@@ -243,13 +313,13 @@ html {
 
 .cursor-clicked {
   transform: translate(-50%, -50%) scale(0.8);
-  background-color: theme('colors.navy');
+  background-color: theme('colors.primary.DEFAULT');
 }
 
 .cursor-hovering {
   width: 30px;
   height: 30px;
-  background-color: theme('colors.navy');
+  background-color: theme('colors.primary.DEFAULT');
   mix-blend-mode: normal;
 }
 
@@ -273,4 +343,28 @@ html {
 
 .btn-hover-effect:hover::before {
   width: 100%;
+}
+
+/* Futuristic glowing effect */
+.glow {
+  position: relative;
+}
+
+.glow::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 16px;
+  background: linear-gradient(45deg, rgba(99, 179, 237, 0.5), rgba(59, 130, 246, 0.2), rgba(147, 197, 253, 0.3));
+  filter: blur(20px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.glow:hover::after {
+  opacity: 1;
 }
