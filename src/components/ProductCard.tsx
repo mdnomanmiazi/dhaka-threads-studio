@@ -1,6 +1,14 @@
 
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription, DialogHeader, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { X } from "lucide-react";
 
 interface ProductCardProps {
   image: string;
@@ -11,6 +19,16 @@ interface ProductCardProps {
   index?: number;
 }
 
+// Form validation schema
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  companyName: z.string().min(2, { message: "Company name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z.string().min(7, { message: "Please enter a valid phone number." }),
+  productName: z.string(),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." })
+});
+
 const ProductCard: React.FC<ProductCardProps> = ({ 
   image, 
   title, 
@@ -20,11 +38,45 @@ const ProductCard: React.FC<ProductCardProps> = ({
   index = 0
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const animationDelay = `${index * 150}ms`;
   
+  // Initialize form
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      companyName: "",
+      email: "",
+      phone: "",
+      productName: title,
+      message: ""
+    }
+  });
+
+  // Form submission handler
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log("Form submitted:", values);
+    // Here you would typically send this data to your backend
+    setTimeout(() => {
+      setIsSubmitted(true);
+    }, 600);
+  };
+
+  // Reset form state when dialog closes
+  const handleDialogClose = () => {
+    if (isSubmitted) {
+      setTimeout(() => {
+        setIsSubmitted(false);
+        form.reset();
+      }, 300);
+    }
+  };
+  
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => !open && handleDialogClose()}>
       <DialogTrigger asChild>
         <div 
           className="product-card bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
@@ -97,6 +149,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </DialogTrigger>
       
       <DialogContent className="max-w-3xl">
+        {/* Product Details */}
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-serif font-medium text-navy">{title}</DialogTitle>
+          <DialogDescription className="text-gray-600">{category}</DialogDescription>
+        </DialogHeader>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-[1.02]">
             <img
@@ -106,12 +164,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
             />
           </div>
           <div>
-            <div className="mb-2">
-              <span className="bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full">
-                {category}
-              </span>
-            </div>
-            <h2 className="text-2xl font-serif font-medium text-navy mb-3">{title}</h2>
             <p className="text-gray-600 mb-4">{description}</p>
             
             {tags.length > 0 && (
@@ -128,9 +180,138 @@ const ProductCard: React.FC<ProductCardProps> = ({
             )}
             
             <div className="mt-6">
-              <button className="btn-primary w-full btn-hover-effect">
-                Request Sample
-              </button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-gold hover:bg-gold/90 text-navy font-medium">
+                    Request Sample
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Request Sample</DialogTitle>
+                    <DialogDescription>
+                      Fill out the form below to request a sample of {title}
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  {!isSubmitted ? (
+                    <Form {...form}>
+                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Your name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <FormField
+                          control={form.control}
+                          name="companyName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Company Name</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Your company" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                  <Input type="email" placeholder="your.email@example.com" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Phone</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Your phone number" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                        
+                        <FormField
+                          control={form.control}
+                          name="productName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Product</FormLabel>
+                              <FormControl>
+                                <Input {...field} readOnly />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <FormField
+                          control={form.control}
+                          name="message"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Message</FormLabel>
+                              <FormControl>
+                                <Textarea 
+                                  placeholder="Please provide any additional details about your request" 
+                                  className="min-h-[120px]" 
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <DialogFooter className="mt-6">
+                          <DialogClose asChild>
+                            <Button type="button" variant="outline">Cancel</Button>
+                          </DialogClose>
+                          <Button type="submit" className="bg-navy hover:bg-navy/90">Submit Request</Button>
+                        </DialogFooter>
+                      </form>
+                    </Form>
+                  ) : (
+                    <div className="py-8 text-center animate-fade-in">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-serif font-medium text-navy mb-2">Thank You!</h3>
+                      <p className="text-gray-600">Your sample request has been submitted. We'll get back to you shortly.</p>
+                      <div className="mt-6">
+                        <DialogClose asChild>
+                          <Button variant="outline">Close</Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  )}
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
