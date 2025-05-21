@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 import HeroSlider from '@/components/HeroSlider';
 import FeatureColumn from '@/components/FeatureColumn';
 import ProductCard from '@/components/ProductCard';
-import ProductGallery from '@/components/ProductGallery';
 import FabricFeatures from '@/components/FabricFeatures';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MouseCursorEffect from '@/components/MouseCursorEffect';
+import InteractiveFabricHighlights from '@/components/InteractiveFabricHighlights';
+import BrandValueBlocks from '@/components/BrandValueBlocks';
+import BrandLogoCarousel from '@/components/BrandLogoCarousel';
+import VideoBackground from '@/components/VideoBackground';
+import CtaBanner from '@/components/CtaBanner';
+
 const Index = () => {
   // Animation observer for scroll animations
   useEffect(() => {
@@ -105,46 +110,6 @@ const Index = () => {
     tags: ["Men's", "Denim", "Jacket"]
   }];
 
-  // Product category galleries
-  const wovenGallery = [{
-    id: 1,
-    src: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
-    alt: "Premium cotton shirt"
-  }, {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-    alt: "Linen blend blazers"
-  }, {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    alt: "Oxford button-down shirt"
-  }];
-  const knitGallery = [{
-    id: 1,
-    src: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    alt: "Soft knit sweater"
-  }, {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
-    alt: "Cotton T-shirt"
-  }, {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
-    alt: "Performance polo"
-  }];
-  const denimGallery = [{
-    id: 1,
-    src: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    alt: "Designer denim jeans"
-  }, {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-    alt: "Men's straight fit jeans"
-  }, {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1624378439575-d8705ad7b66b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
-    alt: "Denim jacket"
-  }];
   return <div className="page-transition">
       <MouseCursorEffect />
       <Header />
@@ -173,15 +138,16 @@ const Index = () => {
       {/* New Fabric Features Section */}
       <FabricFeatures />
       
-      {/* Category Galleries */}
-      <div className="bg-white py-8">
-        <ProductGallery title="Woven Excellence" description="Discover our premium collection of woven garments, from shirts to blazers, all crafted with the finest materials and attention to detail." categoryLink="/woven" images={wovenGallery} />
-        
-        {/* Knit Comfort now left-aligned */}
-        
-        
-        <ProductGallery title="Denim Durability" description="Explore our range of premium denim products, combining classic styling with modern techniques for unmatched quality and comfort." categoryLink="/denim" images={denimGallery} />
-      </div>
+      {/* NEW SECTIONS REPLACING PRODUCT GALLERY */}
+      <InteractiveFabricHighlights />
+      
+      <VideoBackground />
+      
+      <BrandValueBlocks />
+      
+      <BrandLogoCarousel />
+      
+      <CtaBanner />
       
       {/* Featured Products Section */}
       <section className="section-padding bg-gray-50">
@@ -201,52 +167,6 @@ const Index = () => {
             <Link to="/woven" className="btn-primary">
               Explore All Products
             </Link>
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="py-20 bg-navy text-white">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center animate-on-scroll">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Ready to Elevate Your Fashion Brand?</h2>
-            <p className="text-lg mb-8">Partner with us for premium garment manufacturing solutions that combine quality, innovation, and reliability.</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="btn-secondary">
-                Contact Us
-              </Link>
-              <Link to="/about" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-navy transition-all px-6 py-3 rounded btn-hover-effect">
-                Learn More
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Clients/Trusted by Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center max-w-3xl mx-auto mb-12 animate-on-scroll">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">Trusted by Global Brands</h2>
-            <p className="text-gray-600">We've proudly served leading fashion brands from around the world with quality garment manufacturing solutions.</p>
-          </div>
-          
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
-            <div className="w-24 h-12 stagger-item flex items-center justify-center">
-              <div className="text-2xl font-bold text-gray-400">BRAND 1</div>
-            </div>
-            <div className="w-24 h-12 stagger-item flex items-center justify-center">
-              <div className="text-2xl font-bold text-gray-400">BRAND 2</div>
-            </div>
-            <div className="w-24 h-12 stagger-item flex items-center justify-center">
-              <div className="text-2xl font-bold text-gray-400">BRAND 3</div>
-            </div>
-            <div className="w-24 h-12 stagger-item flex items-center justify-center">
-              <div className="text-2xl font-bold text-gray-400">BRAND 4</div>
-            </div>
-            <div className="w-24 h-12 stagger-item flex items-center justify-center">
-              <div className="text-2xl font-bold text-gray-400">BRAND 5</div>
-            </div>
           </div>
         </div>
       </section>
