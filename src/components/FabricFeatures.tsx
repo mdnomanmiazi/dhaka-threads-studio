@@ -1,8 +1,7 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
-import { Shirt, TShirt, Scissors } from "lucide-react";
+import { Shirt, Scissors } from "lucide-react";
 
 interface FeatureBlockProps {
   title: string;
@@ -112,7 +111,7 @@ const FabricFeatures: React.FC = () => {
             backgroundImage="https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
             linkTo="/knit"
             delay={150}
-            icon={<TShirt size={32} />}
+            icon={<Shirt size={32} />}
           />
           <FeatureBlock 
             title="DENIM INNOVATION" 
