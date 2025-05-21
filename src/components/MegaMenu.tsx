@@ -10,7 +10,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const categoryData = [
@@ -69,6 +68,12 @@ export function MegaMenu() {
                   </p>
                 </Link>
               ))}
+              <Link
+                to="/products"
+                className="col-span-1 md:col-span-2 lg:col-span-3 block select-none rounded-md bg-navy p-3 text-white leading-none no-underline outline-none transition-colors hover:bg-navy/90 focus:bg-navy/90 text-center"
+              >
+                <div className="text-sm font-medium">View All Products</div>
+              </Link>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
