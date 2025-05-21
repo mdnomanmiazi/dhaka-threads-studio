@@ -1,9 +1,9 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSlider from '@/components/HeroSlider';
 import FeatureColumn from '@/components/FeatureColumn';
 import ProductCard from '@/components/ProductCard';
-import ProductGallery from '@/components/ProductGallery';
 import FabricFeatures from '@/components/FabricFeatures';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -125,61 +125,6 @@ const Index = () => {
       tags: ["Men's", "Denim", "Jacket"],
     },
   ];
-
-  // Product category galleries
-  const wovenGallery = [
-    {
-      id: 1,
-      src: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
-      alt: "Premium cotton shirt"
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-      alt: "Linen blend blazers"
-    },
-    {
-      id: 3,
-      src: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      alt: "Oxford button-down shirt"
-    }
-  ];
-  
-  const knitGallery = [
-    {
-      id: 1,
-      src: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      alt: "Soft knit sweater"
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80",
-      alt: "Cotton T-shirt"
-    },
-    {
-      id: 3,
-      src: "https://images.unsplash.com/photo-1616150638538-ffb0679a3fc4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
-      alt: "Performance polo"
-    }
-  ];
-  
-  const denimGallery = [
-    {
-      id: 1,
-      src: "https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-      alt: "Designer denim jeans"
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-      alt: "Men's straight fit jeans"
-    },
-    {
-      id: 3,
-      src: "https://images.unsplash.com/photo-1624378439575-d8705ad7b66b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
-      alt: "Denim jacket"
-    }
-  ];
   
   return (
     <div className="page-transition">
@@ -224,52 +169,6 @@ const Index = () => {
       
       {/* New Fabric Features Section */}
       <FabricFeatures />
-      
-      {/* Category Galleries */}
-      <div className="bg-white py-8">
-        <ProductGallery 
-          title="Woven Excellence" 
-          description="Discover our premium collection of woven garments, from shirts to blazers, all crafted with the finest materials and attention to detail."
-          categoryLink="/woven"
-          images={wovenGallery}
-        />
-        
-        {/* Knit Comfort now left-aligned */}
-        <div className="container-custom py-16">
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2 md:pr-8">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">Knit Comfort</h2>
-              <p className="text-gray-600 mb-6">Experience the perfect blend of comfort and style with our knit collection, featuring everything from casual t-shirts to luxury sweaters.</p>
-              <Link to="/knit" className="inline-block btn-secondary mb-8 md:mb-0">
-                Explore Knit Products
-              </Link>
-            </div>
-            <div className="w-full md:w-1/2">
-              <div className="grid grid-cols-2 gap-4">
-                {knitGallery.map((image) => (
-                  <div key={image.id} className="relative overflow-hidden rounded-lg gallery-item">
-                    <img 
-                      src={image.src} 
-                      alt={image.alt} 
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute inset-0 overlay flex items-end">
-                      <p className="text-white px-4 pb-4 text-sm opacity-0 group-hover:opacity-100 transition-opacity">{image.alt}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <ProductGallery 
-          title="Denim Durability" 
-          description="Explore our range of premium denim products, combining classic styling with modern techniques for unmatched quality and comfort."
-          categoryLink="/denim"
-          images={denimGallery}
-        />
-      </div>
       
       {/* Featured Products Section */}
       <section className="section-padding bg-gray-50">

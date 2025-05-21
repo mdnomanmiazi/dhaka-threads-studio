@@ -48,23 +48,27 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link 
-          to={linkTo}
+        <div
           ref={blockRef}
           className="animate-on-scroll relative block overflow-hidden group bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-lg shadow-xl transition-all duration-500"
         >
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-          ></div>
-          <div className="relative h-full flex flex-col justify-between p-8 z-10">
-            <h3 className="text-4xl font-serif font-bold tracking-wider text-white mb-2">{title}</h3>
-            <div className="h-px w-16 bg-gradient-to-r from-white to-transparent my-3"></div>
-            <p className="text-white/80 text-lg font-light italic">{subtitle}</p>
-          </div>
-          <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-navy/80 to-transparent opacity-80"></div>
-          <div className="absolute inset-0 border border-white/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        </Link>
+          <Link 
+            to={linkTo}
+            className="block h-full"
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"
+              style={{ backgroundImage: `url(${backgroundImage})` }}
+            ></div>
+            <div className="relative h-full flex flex-col justify-between p-8 z-10">
+              <h3 className="text-4xl font-serif font-bold tracking-wider text-white mb-2">{title}</h3>
+              <div className="h-px w-16 bg-gradient-to-r from-white to-transparent my-3"></div>
+              <p className="text-white/80 text-lg font-light italic">{subtitle}</p>
+            </div>
+            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-navy/80 to-transparent opacity-80"></div>
+            <div className="absolute inset-0 border border-white/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </Link>
+        </div>
       </HoverCardTrigger>
       <HoverCardContent className="glassmorphism bg-white/10 backdrop-blur-md border-white/20 text-white w-auto">
         <p className="text-sm">Explore our {title.toLowerCase()} fabric collection</p>
