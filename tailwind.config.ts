@@ -63,12 +63,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom brand colors - updated to futuristic cold palette
-				navy: '#1E3A8A', // dark blue
-				gold: '#38BDF8', // bright sky blue (replacing gold with icy blue)
-				silver: '#94A3B8', // metallic silver/gray
-				frost: '#F0F9FF', // icy white/blue
-				slate: '#334155', // dark slate
+				// Custom brand colors
+				navy: '#0F2D52',
+				gold: '#D4AF37',
+				// New cold futuristic colors
+				iceBlue: '#33C3F0',
+				silver: '#9F9EA1',
+				coolGray: '#aaadb0',
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
@@ -100,13 +101,13 @@ export default {
 					'0%': { transform: 'scale(0.95)', opacity: '0' },
 					'100%': { transform: 'scale(1)', opacity: '1' },
 				},
-				'pulse-glow': {
-					'0%, 100%': { opacity: '0.6' },
-					'50%': { opacity: '1' },
+				'pulse': {
+					'0%, 100%': { opacity: '0.5' },
+					'50%': { opacity: '0.8' },
 				},
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-20px)' },
+					'50%': { transform: 'translateY(-10px)' },
 				},
 			},
 			animation: {
@@ -115,7 +116,7 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'slide-in': 'slide-in 0.5s ease-out',
 				'zoom-in': 'zoom-in 0.5s ease-out',
-				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'pulse': 'pulse 3s ease-in-out infinite',
 				'float': 'float 6s ease-in-out infinite',
 			},
 		}
