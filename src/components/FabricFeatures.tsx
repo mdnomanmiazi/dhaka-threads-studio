@@ -100,21 +100,21 @@ const FabricFeatures: React.FC = () => {
             title="WOVEN" 
             subtitle="Crisp & Classic" 
             backgroundImage="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-            linkTo="/products"
+            linkTo="/woven"
             delay={0}
           />
           <FeatureBlock 
             title="KNIT" 
             subtitle="Soft & Stretchable" 
             backgroundImage="https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-            linkTo="/products"
+            linkTo="/knit"
             delay={150}
           />
           <FeatureBlock 
             title="DENIM" 
             subtitle="Bold & Built to Last" 
             backgroundImage="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            linkTo="/products"
+            linkTo="/denim"
             delay={300}
           />
         </div>

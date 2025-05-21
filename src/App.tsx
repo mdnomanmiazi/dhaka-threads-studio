@@ -8,7 +8,6 @@ import Index from "./pages/Index";
 import Woven from "./pages/Woven";
 import Knit from "./pages/Knit";
 import Denim from "./pages/Denim";
-import Products from "./pages/Products";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -23,7 +22,6 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/products" element={<Products />} />
           <Route path="/woven" element={<Woven />} />
           <Route path="/knit" element={<Knit />} />
           <Route path="/denim" element={<Denim />} />
