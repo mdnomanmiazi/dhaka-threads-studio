@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { X } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   image: string;
@@ -40,6 +41,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   
   const animationDelay = `${index * 150}ms`;
   
@@ -57,12 +60,44 @@ const ProductCard: React.FC<ProductCardProps> = ({
   });
 
   // Form submission handler
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log("Form submitted:", values);
-    // Here you would typically send this data to your backend
-    setTimeout(() => {
-      setIsSubmitted(true);
-    }, 600);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Send data to the webhook
+      const response = await fetch('https://n8n.tunelai.com/webhook-test/f2d16942-0f05-4c13-b4ce-35eee59d4e58', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      
+      if (response.ok) {
+        console.log("Form submitted:", values);
+        toast({
+          title: "Success",
+          description: "Your sample request has been submitted successfully!",
+        });
+        setIsSubmitted(true);
+      } else {
+        console.error("Form submission failed:", response.statusText);
+        toast({
+          title: "Error",
+          description: "There was a problem submitting your request. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Connection error. Please check your internet connection and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Reset form state when dialog closes
@@ -290,7 +325,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
                           <DialogClose asChild>
                             <Button type="button" variant="outline">Cancel</Button>
                           </DialogClose>
-                          <Button type="submit" className="bg-navy hover:bg-navy/90">Submit Request</Button>
+                          <Button 
+                            type="submit" 
+                            className="bg-navy hover:bg-navy/90"
+                            disabled={isSubmitting}
+                          >
+                            {isSubmitting ? "Submitting..." : "Submit Request"}
+                          </Button>
                         </DialogFooter>
                       </form>
                     </Form>
