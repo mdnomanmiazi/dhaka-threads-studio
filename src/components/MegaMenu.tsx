@@ -18,7 +18,7 @@ const categoryData = [
     title: "Woven",
     href: "/woven",
     description: "Premium woven fabrics with exquisite patterns and textures for high-quality garments.",
-    image: "/images/woven-thumb.jpg"
+    image: "https://i.postimg.cc/y8RR5RGy/istockphoto-1212748734-612x612.jpg"
   },
   {
     title: "Knit",
