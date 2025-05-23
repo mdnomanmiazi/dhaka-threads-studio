@@ -43,7 +43,7 @@ const Denim = () => {
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       title: "Men's Straight Fit Jeans",
       category: "Denim",
       description: "Classic straight fit jeans made from high-quality denim with traditional five-pocket styling and versatile washes.",
