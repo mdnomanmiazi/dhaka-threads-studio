@@ -14,7 +14,7 @@ const Woven = () => {
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80",
-      title: "Premium Cotton Shirts",
+      title: "Premium Cotton Shirts test",
       description: "High-quality cotton shirts with premium stitching and attention to detail, perfect for both casual and formal wear.",
     },
     {
