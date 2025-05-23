@@ -53,7 +53,7 @@ const About = () => {
             <div className="animate-on-scroll order-2 lg:order-1">
               <h2 className="text-3xl font-serif font-bold text-navy mb-4">Our Story</h2>
               <p className="text-gray-600 mb-4">
-                FashionTrends was founded in 2005 by a team of experienced textile professionals with a shared vision: to create a garment buying house that combines global quality standards with the manufacturing advantages of Bangladesh.
+                TexWaveFashion was founded in 2005 by a team of experienced textile professionals with a shared vision: to create a garment buying house that combines global quality standards with the manufacturing advantages of Bangladesh.
               </p>
               <p className="text-gray-600 mb-4">
                 Starting with a small team of just 15 dedicated professionals, we've grown to become one of the leading apparel sourcing partners for brands around the world. Today, our team of over 150 experts works tirelessly to ensure that every garment we produce meets the exact specifications of our clients.
