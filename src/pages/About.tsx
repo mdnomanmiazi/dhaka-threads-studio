@@ -65,7 +65,7 @@ const About = () => {
             
             <div className="animate-on-scroll order-1 lg:order-2">
               <img 
-                src="https://images.unsplash.com/photo-1606913419164-92440d5e9795?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" 
+                src="https://i.postimg.cc/1tpf32Tj/1659540133081.jpg" 
                 alt="Factory interior" 
                 className="rounded-lg shadow-lg object-cover w-full h-full"
               />
@@ -156,16 +156,16 @@ const About = () => {
                     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
                       <div className="w-full h-32 flex items-center justify-center overflow-hidden">
                         <img 
-                          src="https://images.unsplash.com/photo-1614036634955-ae5e90f9b9eb?auto=format&fit=crop&q=80" 
-                          alt="ISO 9001 Certification" 
+                          src="https://mother-tex.com/wp-content/uploads/2021/11/bsci.png" 
+                          alt="BSCI Certification" 
                           className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
-                      <p className="text-center mt-4 font-medium text-navy">ISO 9001</p>
+                      <p className="text-center mt-4 font-medium text-navy">BSCI</p>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-navy text-white">
-                    <p>ISO 9001 - Quality Management Systems</p>
+                    <p>BSCI</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -179,16 +179,16 @@ const About = () => {
                     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
                       <div className="w-full h-32 flex items-center justify-center overflow-hidden">
                         <img 
-                          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80" 
-                          alt="Global Organic Textile Standard" 
+                          src="https://mother-tex.com/wp-content/uploads/2021/11/accord.png" 
+                          alt="ACCORD" 
                           className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
-                      <p className="text-center mt-4 font-medium text-navy">GOTS</p>
+                      <p className="text-center mt-4 font-medium text-navy">ACCORD</p>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-navy text-white">
-                    <p>Global Organic Textile Standard</p>
+                    <p>ACCORD</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -202,7 +202,7 @@ const About = () => {
                     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
                       <div className="w-full h-32 flex items-center justify-center overflow-hidden">
                         <img 
-                          src="https://images.unsplash.com/photo-1621950631914-151bdb1f6cd8?auto=format&fit=crop&q=80" 
+                          src="https://mother-tex.com/wp-content/uploads/2021/11/oeko-tex.png" 
                           alt="OEKO-TEX Standard 100" 
                           className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
                         />
@@ -225,16 +225,16 @@ const About = () => {
                     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
                       <div className="w-full h-32 flex items-center justify-center overflow-hidden">
                         <img 
-                          src="https://images.unsplash.com/photo-1611784728558-6a883d5d7f08?auto=format&fit=crop&q=80" 
-                          alt="Fair Trade Certification" 
+                          src="https://mother-tex.com/wp-content/uploads/2021/11/GOTS.png" 
+                          alt="GOTS" 
                           className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
-                      <p className="text-center mt-4 font-medium text-navy">Fair Trade</p>
+                      <p className="text-center mt-4 font-medium text-navy">GOTS</p>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-navy text-white">
-                    <p>Fair Trade Certified - Supporting ethical labor practices</p>
+                    <p>GOTS</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -248,16 +248,16 @@ const About = () => {
                     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group">
                       <div className="w-full h-32 flex items-center justify-center overflow-hidden">
                         <img 
-                          src="https://images.unsplash.com/photo-1607000975981-3231515bd113?auto=format&fit=crop&q=80" 
-                          alt="Carbon Trust Standard" 
+                          src="https://mother-tex.com/wp-content/uploads/2021/11/LEED.png" 
+                          alt="LEED Green Associate" 
                           className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
-                      <p className="text-center mt-4 font-medium text-navy">Carbon Trust</p>
+                      <p className="text-center mt-4 font-medium text-navy">LEED Green Associate</p>
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-navy text-white">
-                    <p>Carbon Trust Standard - Environmental sustainability</p>
+                    <p>LEED Green Associate</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
