@@ -18,19 +18,19 @@ const categoryData = [
     title: "Woven",
     href: "/woven",
     description: "Premium woven fabrics with exquisite patterns and textures for high-quality garments.",
-    image: "https://i.postimg.cc/y8RR5RGy/istockphoto-1212748734-612x612.jpg"
+    image: "https://i.postimg.cc/rp2qcRVP/Whats-App-Image-2025-05-23-at-9-17-12-PM-1.jpg"
   },
   {
     title: "Knit",
     href: "/knit",
     description: "Versatile knit fabrics offering comfort and style for casual and athletic wear.",
-    image: "/images/knit-thumb.jpg"
+    image: "https://i.postimg.cc/fWcmhYM6/licensed-image.jpg"
   },
   {
     title: "Denim",
     href: "/denim",
     description: "Durable denim fabrics with modern washes and finishes for contemporary fashion.",
-    image: "/images/denim-thumb.jpg"
+    image: "https://i.postimg.cc/VvgJ0B6v/Screenshot-8.png"
   }
 ];
 
