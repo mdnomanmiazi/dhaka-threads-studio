@@ -38,7 +38,7 @@ const About = () => {
       <section className="pt-32 pb-20 bg-navy text-white">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">About FashionTrends</h1>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">About TexWaveFashion</h1>
             <p className="text-lg opacity-90">
               Your trusted partner for high-quality garment manufacturing solutions since 2005.
             </p>
