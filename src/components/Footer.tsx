@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="animate-fade-in">
-            <h3 className="text-xl font-serif font-bold text-gold mb-4">FashionTrends</h3>
+            <h3 className="text-xl font-serif font-bold text-gold mb-4">TexWaveFashion</h3>
             <p className="text-sm text-gray-300 mb-4">
               Your trusted global apparel sourcing partner based in Dhaka, Bangladesh.
               We specialize in high-quality woven, knit, and denim products.
