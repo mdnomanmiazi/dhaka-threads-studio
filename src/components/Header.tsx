@@ -41,7 +41,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <h1 className="text-navy text-2xl font-bold">
-            Fashion<span className="text-gold">Trends</span>
+            TexWave<span className="text-gold">Fashion</span>
           </h1>
         </Link>
         
