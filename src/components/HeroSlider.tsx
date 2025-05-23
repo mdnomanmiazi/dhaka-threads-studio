@@ -18,7 +18,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
+    image: 'https://i.postimg.cc/K8ysHHh8/fashion-portrait-gorgeous-woman-stylish-winter-fluffy-blue-coat-black-hat-posing-bright-grey-wall.jpg',
     heading: 'Trusted Global Apparel Sourcing',
     subheading: 'Your premium partner for fashion manufacturing in Bangladesh',
     ctaLink: '/contact',
@@ -26,7 +26,7 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+    image: 'https://i.postimg.cc/GmJSwxbJ/pexels-jmendezrf-1536619.jpg',
     heading: 'Quality That Speaks Volumes',
     subheading: 'Premium fabrics and expert craftsmanship for global brands',
     ctaLink: '/about',
@@ -34,7 +34,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
+    image: 'https://i.postimg.cc/LsxCh4YJ/woman-model-business-suit-wearing-hat.jpg',
     heading: 'Fashion Delivered On Time',
     subheading: 'Reliable production and consistent on-time delivery worldwide',
     ctaLink: '/woven',
