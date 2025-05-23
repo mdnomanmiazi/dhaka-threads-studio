@@ -59,7 +59,7 @@ const Knit = () => {
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1546482705-1233e8530333?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=723&q=80",
+      image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
       title: "Lightweight Cardigans",
       category: "Knit",
       description: "Versatile and lightweight cardigans crafted from fine knit yarns, perfect for layering in any season.",
@@ -91,7 +91,7 @@ const Knit = () => {
     },
     {
       id: 8,
-      image: "https://images.unsplash.com/photo-1564352969906-8b7f46a8cf7f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      image: "https://images.unsplash.com/photo-1519568470290-c0c1fbfff16f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80",
       title: "Designer Knitwear",
       category: "Knit",
       description: "Premium designer knitwear featuring intricate patterns and luxurious materials for statement fashion pieces.",
