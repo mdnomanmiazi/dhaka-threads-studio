@@ -194,7 +194,7 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-12 animate-on-scroll">
-            <Link to="/woven" className="btn-primary">
+            <Link to="https://demo.texwavefashion.com/woven" className="btn-primary">
               Explore All Products
             </Link>
           </div>
