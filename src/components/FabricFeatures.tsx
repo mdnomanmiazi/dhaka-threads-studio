@@ -50,27 +50,38 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({
       <HoverCardTrigger asChild>
         <div
           ref={blockRef}
-          className="animate-on-scroll relative block overflow-hidden group bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-lg shadow-xl transition-all duration-500"
+          className="animate-on-scroll relative group cursor-pointer"
         >
           <Link 
             to={linkTo}
             className="block h-full"
           >
-            <div 
-              className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-700"
-              style={{ backgroundImage: `url(${backgroundImage})` }}
-            ></div>
-            <div className="relative h-full flex flex-col justify-between p-8 z-10">
-              <h3 className="text-4xl font-serif font-bold tracking-wider text-white mb-2">{title}</h3>
-              <div className="h-px w-16 bg-gradient-to-r from-white to-transparent my-3"></div>
-              <p className="text-white/80 text-lg font-light italic">{subtitle}</p>
+            <div className="relative h-80 rounded-2xl overflow-hidden bg-white shadow-lg border border-gray-100 transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url(${backgroundImage})` }}
+              ></div>
+              
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent"></div>
+              
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-8 z-10">
+                <div className="transform transition-transform duration-500 group-hover:translate-y-[-8px]">
+                  <h3 className="text-3xl font-serif font-bold text-white mb-2 tracking-wide">{title}</h3>
+                  <div className="w-12 h-0.5 bg-gold mb-3 transition-all duration-500 group-hover:w-20"></div>
+                  <p className="text-white/90 text-lg font-light">{subtitle}</p>
+                </div>
+              </div>
+              
+              {/* Hover Effect Border */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-navy/80 to-transparent opacity-80"></div>
-            <div className="absolute inset-0 border border-white/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </Link>
         </div>
       </HoverCardTrigger>
-      <HoverCardContent className="glassmorphism bg-white/10 backdrop-blur-md border-white/20 text-white w-auto">
+      <HoverCardContent className="bg-white border border-gray-200 shadow-lg text-gray-800 w-auto">
         <p className="text-sm">Explore our {title.toLowerCase()} fabric collection</p>
       </HoverCardContent>
     </HoverCard>
@@ -79,60 +90,48 @@ const FeatureBlock: React.FC<FeatureBlockProps> = ({
 
 const FabricFeatures: React.FC = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-navy/95 z-0"></div>
-      
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full border border-white/5 animate-pulse opacity-30"></div>
-        <div className="absolute top-3/4 right-1/3 w-96 h-96 rounded-full border border-white/10 animate-pulse opacity-20" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/4 left-2/3 w-48 h-48 rounded-full border border-white/5 animate-pulse opacity-10" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-gold/10 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-navy/5 to-transparent rounded-full blur-3xl"></div>
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16 animate-on-scroll">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">Fabric Innovation</h2>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg">Discover our premium textile categories, each crafted with precision and innovation.</p>
+          <div className="inline-block">
+            <span className="text-sm font-medium text-gold uppercase tracking-wider mb-2 block">Premium Collections</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-navy mb-4">
+              Fabric Innovation
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-gold to-navy mx-auto mb-6"></div>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+            Discover our premium textile categories, each crafted with precision and innovation for the modern fashion industry.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <FeatureBlock 
             title="WOVEN" 
             subtitle="Crisp & Classic" 
             backgroundImage="https://images.unsplash.com/photo-1594938291221-94f18cbb5660?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-            linkTo="/woven"
+            linkTo="/products"
             delay={0}
           />
           <FeatureBlock 
             title="KNIT" 
             subtitle="Soft & Stretchable" 
             backgroundImage="https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-            linkTo="/knit"
+            linkTo="/products"
             delay={150}
           />
           <FeatureBlock 
             title="DENIM" 
             subtitle="Bold & Built to Last" 
             backgroundImage="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-            linkTo="/denim"
+            linkTo="/products"
             delay={300}
           />
         </div>
-      </div>
-      
-      {/* Diagonal section divider */}
-      <div className="absolute bottom-0 left-0 w-full h-16 overflow-hidden z-10">
-        <svg 
-          viewBox="0 0 1440 100" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="absolute bottom-0 w-full h-full"
-        >
-          <path 
-            d="M0 100H1440V20L0 100Z" 
-            fill="white" 
-          />
-        </svg>
       </div>
     </section>
   );
